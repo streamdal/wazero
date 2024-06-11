@@ -22,11 +22,11 @@ func crcf(b []byte) []byte {
 
 func TestSerializeCompiledModule(t *testing.T) {
 	tests := []struct {
-		in  *compiledModule
+		in  *CompiledModule
 		exp []byte
 	}{
 		{
-			in: &compiledModule{
+			in: &CompiledModule{
 				executables:     &executables{executable: []byte{1, 2, 3, 4, 5}},
 				functionOffsets: []int{0},
 			},
@@ -43,7 +43,7 @@ func TestSerializeCompiledModule(t *testing.T) {
 			),
 		},
 		{
-			in: &compiledModule{
+			in: &CompiledModule{
 				executables:     &executables{executable: []byte{1, 2, 3, 4, 5}},
 				functionOffsets: []int{0},
 			},
@@ -60,7 +60,7 @@ func TestSerializeCompiledModule(t *testing.T) {
 			),
 		},
 		{
-			in: &compiledModule{
+			in: &CompiledModule{
 				executables:     &executables{executable: []byte{1, 2, 3, 4, 5, 1, 2, 3}},
 				functionOffsets: []int{0, 5},
 			},
@@ -83,7 +83,7 @@ func TestSerializeCompiledModule(t *testing.T) {
 	}
 
 	for i, tc := range tests {
-		actual, err := io.ReadAll(serializeCompiledModule(testVersion, tc.in))
+		actual, err := io.ReadAll(SerializeCompiledModule(testVersion, tc.in))
 		require.NoError(t, err, i)
 		require.Equal(t, tc.exp, actual, i)
 	}
@@ -101,7 +101,7 @@ func TestDeserializeCompiledModule(t *testing.T) {
 		name                  string
 		in                    []byte
 		importedFunctionCount uint32
-		expCompiledModule     *compiledModule
+		expCompiledModule     *CompiledModule
 		expStaleCache         bool
 		expErr                string
 	}{
@@ -154,7 +154,7 @@ func TestDeserializeCompiledModule(t *testing.T) {
 				crcf([]byte{1, 2, 3, 4, 5}), // machine code.
 				[]byte{0},                   // no source map.
 			),
-			expCompiledModule: &compiledModule{
+			expCompiledModule: &CompiledModule{
 				executables:     &executables{executable: []byte{1, 2, 3, 4, 5}},
 				functionOffsets: []int{0},
 			},
@@ -179,7 +179,7 @@ func TestDeserializeCompiledModule(t *testing.T) {
 				[]byte{0}, // no source map.
 			),
 			importedFunctionCount: 1,
-			expCompiledModule: &compiledModule{
+			expCompiledModule: &CompiledModule{
 				executables:     &executables{executable: []byte{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}},
 				functionOffsets: []int{0, 7},
 			},
@@ -229,7 +229,7 @@ func TestDeserializeCompiledModule(t *testing.T) {
 				[]byte{1, 2, 3, 4, 5}, // machine code.
 				[]byte{1, 2, 3, 4},    // crc for machine code.
 			),
-			expCompiledModule: &compiledModule{
+			expCompiledModule: &CompiledModule{
 				executables:     &executables{executable: []byte{1, 2, 3, 4, 5}},
 				functionOffsets: []int{0},
 			},
@@ -248,7 +248,7 @@ func TestDeserializeCompiledModule(t *testing.T) {
 				u64.LeBytes(5),        // size.
 				[]byte{1, 2, 3, 4, 5}, // machine code.
 			),
-			expCompiledModule: &compiledModule{
+			expCompiledModule: &CompiledModule{
 				executables:     &executables{executable: []byte{1, 2, 3, 4, 5}},
 				functionOffsets: []int{0},
 			},
@@ -268,7 +268,7 @@ func TestDeserializeCompiledModule(t *testing.T) {
 				[]byte{1, 2, 3, 4, 5},       // machine code.
 				crcf([]byte{1, 2, 3, 4, 5}), // crc for machine code.
 			),
-			expCompiledModule: &compiledModule{
+			expCompiledModule: &CompiledModule{
 				executables:     &executables{executable: []byte{1, 2, 3, 4, 5}},
 				functionOffsets: []int{0},
 			},
@@ -280,7 +280,7 @@ func TestDeserializeCompiledModule(t *testing.T) {
 	for _, tc := range tests {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
-			cm, staleCache, err := deserializeCompiledModule(testVersion, io.NopCloser(bytes.NewReader(tc.in)))
+			cm, staleCache, err := DeserializeCompiledModule(testVersion, io.NopCloser(bytes.NewReader(tc.in)))
 
 			if tc.expErr != "" {
 				require.EqualError(t, err, tc.expErr)

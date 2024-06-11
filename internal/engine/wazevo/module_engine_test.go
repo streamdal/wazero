@@ -60,7 +60,7 @@ func TestModuleEngine_setupOpaque(t *testing.T) {
 				Globals: []*wasm.GlobalInstance{
 					{
 						Me: &moduleEngine{
-							parent: &compiledModule{offsets: wazevoapi.ModuleContextOffsetData{GlobalsBegin: importedGlobalBegin}},
+							parent: &CompiledModule{offsets: wazevoapi.ModuleContextOffsetData{GlobalsBegin: importedGlobalBegin}},
 							opaque: make([]byte, 1000),
 						},
 					},
@@ -77,7 +77,7 @@ func TestModuleEngine_setupOpaque(t *testing.T) {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			tc.offset.TotalSize = 1000 // arbitrary large number to ensure we don't panic.
 			m := &moduleEngine{
-				parent: &compiledModule{
+				parent: &CompiledModule{
 					offsets:                   tc.offset,
 					listenerBeforeTrampolines: make([]*byte, 100),
 					listenerAfterTrampolines:  make([]*byte, 200),
@@ -98,7 +98,7 @@ func TestModuleEngine_setupOpaque(t *testing.T) {
 			if tc.offset.ImportedMemoryBegin >= 0 {
 				imported := &moduleEngine{
 					opaque: []byte{1, 2, 3}, module: &wasm.ModuleInstance{MemoryInstance: tc.m.MemoryInstance},
-					parent: &compiledModule{offsets: wazevoapi.ModuleContextOffsetData{ImportedMemoryBegin: -1}},
+					parent: &CompiledModule{offsets: wazevoapi.ModuleContextOffsetData{ImportedMemoryBegin: -1}},
 				}
 				imported.opaquePtr = &imported.opaque[0]
 				m.ResolveImportedMemory(imported)
@@ -156,7 +156,7 @@ func TestModuleEngine_ResolveImportedFunction(t *testing.T) {
 	m := &moduleEngine{
 		opaque:            make([]byte, 10000),
 		importedFunctions: make([]importedFunction, 4),
-		parent: &compiledModule{offsets: wazevoapi.ModuleContextOffsetData{
+		parent: &CompiledModule{offsets: wazevoapi.ModuleContextOffsetData{
 			ImportedFunctionsBegin: begin,
 		}},
 	}
@@ -164,7 +164,7 @@ func TestModuleEngine_ResolveImportedFunction(t *testing.T) {
 	var op1, op2 byte = 0xaa, 0xbb
 	im1 := &moduleEngine{
 		opaquePtr: &op1,
-		parent: &compiledModule{
+		parent: &CompiledModule{
 			executables:     &executables{executable: make([]byte, 1000)},
 			functionOffsets: []int{1, 5, 10},
 		},
@@ -175,7 +175,7 @@ func TestModuleEngine_ResolveImportedFunction(t *testing.T) {
 	}
 	im2 := &moduleEngine{
 		opaquePtr: &op2,
-		parent: &compiledModule{
+		parent: &CompiledModule{
 			executables:     &executables{executable: make([]byte, 1000)},
 			functionOffsets: []int{50, 4},
 		},
@@ -220,7 +220,7 @@ func TestModuleEngine_ResolveImportedFunction_recursive(t *testing.T) {
 	m := &moduleEngine{
 		opaque:            make([]byte, 10000),
 		importedFunctions: make([]importedFunction, 4),
-		parent: &compiledModule{offsets: wazevoapi.ModuleContextOffsetData{
+		parent: &CompiledModule{offsets: wazevoapi.ModuleContextOffsetData{
 			ImportedFunctionsBegin: begin,
 		}},
 	}
@@ -228,7 +228,7 @@ func TestModuleEngine_ResolveImportedFunction_recursive(t *testing.T) {
 	var importingOp, importedOp byte = 0xaa, 0xbb
 	imported := &moduleEngine{
 		opaquePtr: &importedOp,
-		parent: &compiledModule{
+		parent: &CompiledModule{
 			executables:     &executables{executable: make([]byte, 50)},
 			functionOffsets: []int{10},
 		},
@@ -239,7 +239,7 @@ func TestModuleEngine_ResolveImportedFunction_recursive(t *testing.T) {
 	}
 	importing := &moduleEngine{
 		opaquePtr: &importingOp,
-		parent: &compiledModule{
+		parent: &CompiledModule{
 			executables:     &executables{executable: make([]byte, 1000)},
 			functionOffsets: []int{500},
 		},
@@ -278,14 +278,14 @@ func TestModuleEngine_ResolveImportedFunction_recursive(t *testing.T) {
 
 func TestModuleEngine_ResolveImportedMemory_reexported(t *testing.T) {
 	m := &moduleEngine{
-		parent: &compiledModule{offsets: wazevoapi.ModuleContextOffsetData{
+		parent: &CompiledModule{offsets: wazevoapi.ModuleContextOffsetData{
 			ImportedMemoryBegin: 50,
 		}},
 		opaque: make([]byte, 100),
 	}
 
 	importedME := &moduleEngine{
-		parent: &compiledModule{offsets: wazevoapi.ModuleContextOffsetData{
+		parent: &CompiledModule{offsets: wazevoapi.ModuleContextOffsetData{
 			ImportedMemoryBegin: 1000,
 		}},
 		opaque: make([]byte, 2000),

@@ -42,7 +42,7 @@ func fileCacheKey(m *wasm.Module) (ret filecache.Key) {
 	return
 }
 
-func (e *engine) addCompiledModule(module *wasm.Module, cm *compiledModule) (err error) {
+func (e *engine) addCompiledModule(module *wasm.Module, cm *CompiledModule) (err error) {
 	e.addCompiledModuleToMemory(module, cm)
 	if !module.IsHostModule && e.fileCache != nil {
 		err = e.addCompiledModuleToCache(module, cm)
@@ -50,7 +50,7 @@ func (e *engine) addCompiledModule(module *wasm.Module, cm *compiledModule) (err
 	return
 }
 
-func (e *engine) getCompiledModule(module *wasm.Module, listeners []experimental.FunctionListener, ensureTermination bool) (cm *compiledModule, ok bool, err error) {
+func (e *engine) getCompiledModule(module *wasm.Module, listeners []experimental.FunctionListener, ensureTermination bool) (cm *CompiledModule, ok bool, err error) {
 	cm, ok = e.getCompiledModuleFromMemory(module)
 	if ok {
 		return
@@ -85,7 +85,7 @@ func (e *engine) getCompiledModule(module *wasm.Module, listeners []experimental
 	return
 }
 
-func (e *engine) addCompiledModuleToMemory(m *wasm.Module, cm *compiledModule) {
+func (e *engine) addCompiledModuleToMemory(m *wasm.Module, cm *CompiledModule) {
 	e.mux.Lock()
 	defer e.mux.Unlock()
 	e.compiledModules[m.ID] = cm
@@ -94,22 +94,22 @@ func (e *engine) addCompiledModuleToMemory(m *wasm.Module, cm *compiledModule) {
 	}
 }
 
-func (e *engine) getCompiledModuleFromMemory(module *wasm.Module) (cm *compiledModule, ok bool) {
+func (e *engine) getCompiledModuleFromMemory(module *wasm.Module) (cm *CompiledModule, ok bool) {
 	e.mux.RLock()
 	defer e.mux.RUnlock()
 	cm, ok = e.compiledModules[module.ID]
 	return
 }
 
-func (e *engine) addCompiledModuleToCache(module *wasm.Module, cm *compiledModule) (err error) {
+func (e *engine) addCompiledModuleToCache(module *wasm.Module, cm *CompiledModule) (err error) {
 	if e.fileCache == nil || module.IsHostModule {
 		return
 	}
-	err = e.fileCache.Add(fileCacheKey(module), serializeCompiledModule(e.wazeroVersion, cm))
+	err = e.fileCache.Add(fileCacheKey(module), SerializeCompiledModule(e.wazeroVersion, cm))
 	return
 }
 
-func (e *engine) getCompiledModuleFromCache(module *wasm.Module) (cm *compiledModule, hit bool, err error) {
+func (e *engine) getCompiledModuleFromCache(module *wasm.Module) (cm *CompiledModule, hit bool, err error) {
 	if e.fileCache == nil || module.IsHostModule {
 		return
 	}
@@ -125,7 +125,7 @@ func (e *engine) getCompiledModuleFromCache(module *wasm.Module) (cm *compiledMo
 	// We retrieve *code structures from `cached`.
 	var staleCache bool
 	// Note: cached.Close is ensured to be called in deserializeCodes.
-	cm, staleCache, err = deserializeCompiledModule(e.wazeroVersion, cached)
+	cm, staleCache, err = DeserializeCompiledModule(e.wazeroVersion, cached)
 	if err != nil {
 		hit = false
 		return
@@ -137,7 +137,7 @@ func (e *engine) getCompiledModuleFromCache(module *wasm.Module) (cm *compiledMo
 
 var magic = []byte{'W', 'A', 'Z', 'E', 'V', 'O'}
 
-func serializeCompiledModule(wazeroVersion string, cm *compiledModule) io.Reader {
+func SerializeCompiledModule(wazeroVersion string, cm *CompiledModule) io.Reader {
 	buf := bytes.NewBuffer(nil)
 	// First 6 byte: WAZEVO header.
 	buf.Write(magic)
@@ -174,7 +174,7 @@ func serializeCompiledModule(wazeroVersion string, cm *compiledModule) io.Reader
 	return bytes.NewReader(buf.Bytes())
 }
 
-func deserializeCompiledModule(wazeroVersion string, reader io.ReadCloser) (cm *compiledModule, staleCache bool, err error) {
+func DeserializeCompiledModule(wazeroVersion string, reader io.ReadCloser) (cm *CompiledModule, staleCache bool, err error) {
 	defer reader.Close()
 	cacheHeaderSize := len(magic) + 1 /* version size */ + len(wazeroVersion) + 4 /* number of functions */
 
@@ -207,7 +207,7 @@ func deserializeCompiledModule(wazeroVersion string, reader io.ReadCloser) (cm *
 	}
 
 	functionsNum := binary.LittleEndian.Uint32(header[len(header)-4:])
-	cm = &compiledModule{functionOffsets: make([]int, functionsNum), executables: &executables{}}
+	cm = &CompiledModule{functionOffsets: make([]int, functionsNum), executables: &executables{}}
 
 	var eightBytes [8]byte
 	for i := uint32(0); i < functionsNum; i++ {

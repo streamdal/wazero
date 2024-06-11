@@ -31,7 +31,7 @@ func TestEngine_CompiledModuleCount(t *testing.T) {
 	e, ok := NewEngine(ctx, api.CoreFeaturesV1, nil).(*engine)
 	require.True(t, ok)
 	require.Equal(t, uint32(0), e.CompiledModuleCount())
-	e.compiledModules[wasm.ModuleID{}] = &compiledModule{}
+	e.compiledModules[wasm.ModuleID{}] = &CompiledModule{}
 	require.Equal(t, uint32(1), e.CompiledModuleCount())
 }
 
@@ -39,7 +39,7 @@ func TestEngine_DeleteCompiledModule(t *testing.T) {
 	e, ok := NewEngine(ctx, api.CoreFeaturesV1, nil).(*engine)
 	require.True(t, ok)
 	id := wasm.ModuleID{0xaa}
-	err := e.addCompiledModule(&wasm.Module{ID: id}, &compiledModule{
+	err := e.addCompiledModule(&wasm.Module{ID: id}, &CompiledModule{
 		executables: &executables{executable: make([]byte, 1)},
 	})
 	require.NoError(t, err)

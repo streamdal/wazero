@@ -16,7 +16,7 @@ type (
 	moduleEngine struct {
 		// opaquePtr equals &opaque[0].
 		opaquePtr              *byte
-		parent                 *compiledModule
+		parent                 *CompiledModule
 		module                 *wasm.ModuleInstance
 		opaque                 moduleContextOpaque
 		localFunctionInstances []*functionInstance

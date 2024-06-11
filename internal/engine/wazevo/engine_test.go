@@ -114,13 +114,13 @@ func TestEngine_sortedCompiledModules(t *testing.T) {
 	}
 
 	var cms []struct {
-		cm   *compiledModule
+		cm   *CompiledModule
 		addr uintptr
 	}
 	for i := 0; i < 4; i++ {
-		cm := &compiledModule{executables: &executables{executable: make([]byte, 100)}}
+		cm := &CompiledModule{executables: &executables{executable: make([]byte, 100)}}
 		cms = append(cms, struct {
-			cm   *compiledModule
+			cm   *CompiledModule
 			addr uintptr
 		}{cm, uintptr(unsafe.Pointer(&cm.executables.executable[0]))})
 	}
@@ -196,7 +196,7 @@ func TestCompiledModule_functionIndexOf(t *testing.T) {
 		hdr.Cap = 0xffff
 	}
 
-	cm := &compiledModule{
+	cm := &CompiledModule{
 		executables:     &executables{executable: executable},
 		functionOffsets: []int{0, 500, 1000, 2000},
 	}
