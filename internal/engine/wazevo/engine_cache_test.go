@@ -7,10 +7,10 @@ import (
 	"io"
 	"testing"
 
-	"github.com/tetratelabs/wazero/internal/testing/require"
-	"github.com/tetratelabs/wazero/internal/u32"
-	"github.com/tetratelabs/wazero/internal/u64"
-	"github.com/tetratelabs/wazero/internal/wasm"
+	"github.com/streamdal/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/internal/u32"
+	"github.com/streamdal/wazero/internal/u64"
+	"github.com/streamdal/wazero/internal/wasm"
 )
 
 var testVersion = "0.0.1"

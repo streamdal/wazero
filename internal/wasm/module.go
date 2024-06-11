@@ -11,11 +11,11 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/tetratelabs/wazero/api"
-	"github.com/tetratelabs/wazero/experimental"
-	"github.com/tetratelabs/wazero/internal/ieee754"
-	"github.com/tetratelabs/wazero/internal/leb128"
-	"github.com/tetratelabs/wazero/internal/wasmdebug"
+	"github.com/streamdal/wazero/api"
+	"github.com/streamdal/wazero/experimental"
+	"github.com/streamdal/wazero/internal/ieee754"
+	"github.com/streamdal/wazero/internal/leb128"
+	"github.com/streamdal/wazero/internal/wasmdebug"
 )
 
 // Module is a WebAssembly binary representation.

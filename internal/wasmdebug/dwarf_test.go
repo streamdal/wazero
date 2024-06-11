@@ -5,12 +5,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tetratelabs/wazero/api"
-	"github.com/tetratelabs/wazero/internal/testing/dwarftestdata"
-	"github.com/tetratelabs/wazero/internal/testing/hammer"
-	"github.com/tetratelabs/wazero/internal/testing/require"
-	"github.com/tetratelabs/wazero/internal/wasm"
-	"github.com/tetratelabs/wazero/internal/wasm/binary"
+	"github.com/streamdal/wazero/api"
+	"github.com/streamdal/wazero/internal/testing/dwarftestdata"
+	"github.com/streamdal/wazero/internal/testing/hammer"
+	"github.com/streamdal/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/internal/wasm"
+	"github.com/streamdal/wazero/internal/wasm/binary"
 )
 
 func TestDWARFLines_Line_Zig(t *testing.T) {

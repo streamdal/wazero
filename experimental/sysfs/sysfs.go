@@ -8,8 +8,8 @@
 package sysfs
 
 import (
-	experimentalsys "github.com/tetratelabs/wazero/experimental/sys"
-	"github.com/tetratelabs/wazero/internal/sysfs"
+	experimentalsys "github.com/streamdal/wazero/experimental/sys"
+	"github.com/streamdal/wazero/internal/sysfs"
 )
 
 // AdaptFS adapts the input to sys.FS. Use DirFS instead of adapting an

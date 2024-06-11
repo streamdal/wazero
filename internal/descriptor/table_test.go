@@ -3,8 +3,8 @@ package descriptor_test
 import (
 	"testing"
 
-	"github.com/tetratelabs/wazero/internal/sys"
-	"github.com/tetratelabs/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/internal/sys"
+	"github.com/streamdal/wazero/internal/testing/require"
 )
 
 func TestFileTable(t *testing.T) {

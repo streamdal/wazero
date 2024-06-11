@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/backend/regalloc"
-	"github.com/tetratelabs/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/internal/engine/wazevo/backend/regalloc"
+	"github.com/streamdal/wazero/internal/testing/require"
 )
 
 func TestMachine_lowerConstant(t *testing.T) {

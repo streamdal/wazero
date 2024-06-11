@@ -10,13 +10,13 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/tetratelabs/wazero"
-	"github.com/tetratelabs/wazero/api"
-	"github.com/tetratelabs/wazero/experimental"
-	"github.com/tetratelabs/wazero/experimental/logging"
-	"github.com/tetratelabs/wazero/internal/testing/binaryencoding"
-	"github.com/tetratelabs/wazero/internal/testing/require"
-	"github.com/tetratelabs/wazero/internal/wasm"
+	"github.com/streamdal/wazero"
+	"github.com/streamdal/wazero/api"
+	"github.com/streamdal/wazero/experimental"
+	"github.com/streamdal/wazero/experimental/logging"
+	"github.com/streamdal/wazero/internal/testing/binaryencoding"
+	"github.com/streamdal/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/internal/wasm"
 )
 
 // We haven't had public APIs for referencing all the imported entries from wazero.CompiledModule,

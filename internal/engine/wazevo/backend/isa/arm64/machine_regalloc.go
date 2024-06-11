@@ -3,9 +3,9 @@ package arm64
 // This file implements the interfaces required for register allocations. See backend.RegAllocFunctionMachine.
 
 import (
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/backend"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/backend/regalloc"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/ssa"
+	"github.com/streamdal/wazero/internal/engine/wazevo/backend"
+	"github.com/streamdal/wazero/internal/engine/wazevo/backend/regalloc"
+	"github.com/streamdal/wazero/internal/engine/wazevo/ssa"
 )
 
 // ClobberedRegisters implements backend.RegAllocFunctionMachine.

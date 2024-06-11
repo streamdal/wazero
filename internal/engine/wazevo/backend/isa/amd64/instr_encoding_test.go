@@ -5,8 +5,8 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/backend"
-	"github.com/tetratelabs/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/internal/engine/wazevo/backend"
+	"github.com/streamdal/wazero/internal/testing/require"
 )
 
 func TestInstruction_format_encode(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/tetratelabs/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/internal/testing/require"
 )
 
 func TestStdio(t *testing.T) {

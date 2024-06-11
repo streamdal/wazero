@@ -1,8 +1,8 @@
 package backend
 
 import (
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/backend/regalloc"
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/ssa"
+	"github.com/streamdal/wazero/internal/engine/wazevo/backend/regalloc"
+	"github.com/streamdal/wazero/internal/engine/wazevo/ssa"
 )
 
 // RegAllocFunctionMachine is the interface for the machine specific logic that will be used in RegAllocFunction.

@@ -6,9 +6,9 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/tetratelabs/wazero/experimental/sys"
-	"github.com/tetratelabs/wazero/internal/fstest"
-	"github.com/tetratelabs/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/experimental/sys"
+	"github.com/streamdal/wazero/internal/fstest"
+	"github.com/streamdal/wazero/internal/testing/require"
 )
 
 func TestNewReadFS(t *testing.T) {

@@ -7,7 +7,7 @@ package frontend
 import (
 	"sort"
 
-	"github.com/tetratelabs/wazero/internal/engine/wazevo/ssa"
+	"github.com/streamdal/wazero/internal/engine/wazevo/ssa"
 )
 
 func sortSSAValueIDs(IDs []ssa.ValueID) {

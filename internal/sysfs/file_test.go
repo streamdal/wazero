@@ -10,10 +10,10 @@ import (
 	"testing"
 	gofstest "testing/fstest"
 
-	experimentalsys "github.com/tetratelabs/wazero/experimental/sys"
-	"github.com/tetratelabs/wazero/internal/fsapi"
-	"github.com/tetratelabs/wazero/internal/testing/require"
-	"github.com/tetratelabs/wazero/sys"
+	experimentalsys "github.com/streamdal/wazero/experimental/sys"
+	"github.com/streamdal/wazero/internal/fsapi"
+	"github.com/streamdal/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/sys"
 )
 
 //go:embed file_test.go

@@ -8,10 +8,10 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/tetratelabs/wazero"
-	"github.com/tetratelabs/wazero/api"
-	"github.com/tetratelabs/wazero/imports/wasi_snapshot_preview1"
-	"github.com/tetratelabs/wazero/internal/platform"
+	"github.com/streamdal/wazero"
+	"github.com/streamdal/wazero/api"
+	"github.com/streamdal/wazero/imports/wasi_snapshot_preview1"
+	"github.com/streamdal/wazero/internal/platform"
 )
 
 // testCtx is an arbitrary, non-default context. Non-nil also prevents linter errors.

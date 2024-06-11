@@ -3,7 +3,7 @@ package ssa
 import (
 	"testing"
 
-	"github.com/tetratelabs/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/internal/testing/require"
 )
 
 func TestBuilder_passes(t *testing.T) {

@@ -22,7 +22,7 @@ curl https://wazero.io/install.sh | sh
 **Embed wazero** in your Go project and extend any app
 
 ```go
-import "github.com/tetratelabs/wazero"
+import "github.com/streamdal/wazero"
 
 // ...
 

@@ -17,15 +17,15 @@ import (
 	gofstest "testing/fstest"
 	"time"
 
-	"github.com/tetratelabs/wazero"
-	"github.com/tetratelabs/wazero/api"
-	experimentalsock "github.com/tetratelabs/wazero/experimental/sock"
-	"github.com/tetratelabs/wazero/imports/wasi_snapshot_preview1"
-	"github.com/tetratelabs/wazero/internal/fsapi"
-	"github.com/tetratelabs/wazero/internal/fstest"
-	internalsys "github.com/tetratelabs/wazero/internal/sys"
-	"github.com/tetratelabs/wazero/internal/testing/require"
-	"github.com/tetratelabs/wazero/sys"
+	"github.com/streamdal/wazero"
+	"github.com/streamdal/wazero/api"
+	experimentalsock "github.com/streamdal/wazero/experimental/sock"
+	"github.com/streamdal/wazero/imports/wasi_snapshot_preview1"
+	"github.com/streamdal/wazero/internal/fsapi"
+	"github.com/streamdal/wazero/internal/fstest"
+	internalsys "github.com/streamdal/wazero/internal/sys"
+	"github.com/streamdal/wazero/internal/testing/require"
+	"github.com/streamdal/wazero/sys"
 )
 
 // sleepALittle directly slows down test execution. So, use this sparingly and

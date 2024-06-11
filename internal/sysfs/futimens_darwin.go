@@ -4,7 +4,7 @@ import (
 	"syscall"
 	_ "unsafe"
 
-	experimentalsys "github.com/tetratelabs/wazero/experimental/sys"
+	experimentalsys "github.com/streamdal/wazero/experimental/sys"
 )
 
 const (

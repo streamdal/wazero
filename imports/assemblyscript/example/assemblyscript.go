@@ -8,8 +8,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/tetratelabs/wazero"
-	"github.com/tetratelabs/wazero/imports/assemblyscript"
+	"github.com/streamdal/wazero"
+	"github.com/streamdal/wazero/imports/assemblyscript"
 )
 
 // asWasm compiled using `npm install && npm run build`

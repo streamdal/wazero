@@ -6,7 +6,7 @@ import (
 	"io/fs"
 	"os"
 
-	experimentalsys "github.com/tetratelabs/wazero/experimental/sys"
+	experimentalsys "github.com/streamdal/wazero/experimental/sys"
 )
 
 // Link implements the same method as documented on sys.FS

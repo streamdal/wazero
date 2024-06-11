@@ -5,11 +5,11 @@ import (
 	"io/fs"
 	"net"
 
-	"github.com/tetratelabs/wazero/experimental/sys"
-	"github.com/tetratelabs/wazero/internal/descriptor"
-	"github.com/tetratelabs/wazero/internal/fsapi"
-	socketapi "github.com/tetratelabs/wazero/internal/sock"
-	"github.com/tetratelabs/wazero/internal/sysfs"
+	"github.com/streamdal/wazero/experimental/sys"
+	"github.com/streamdal/wazero/internal/descriptor"
+	"github.com/streamdal/wazero/internal/fsapi"
+	socketapi "github.com/streamdal/wazero/internal/sock"
+	"github.com/streamdal/wazero/internal/sysfs"
 )
 
 const (
